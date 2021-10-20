@@ -12,15 +12,19 @@ const passParameters = {
 
 //Ask about password requirements
 const passPrompts = function () {
-  const numCharacters = window.prompt("numCharacters, between 8 and 128");
-  //Check if response is valid
-  if (numCharacters >= 8 && numCharacters <= 128) {
-    //Update passParameters
-    passParameters.quantity = numCharacters;
-  } else {
-    window.prompt("Please enter number between 8 and 128.");
-    //make them try again
+  let numCharacters = window.prompt(
+    "How many characters should your password include, between 8 and 128?"
+  );
+  //Check if response is valid, add or is not number
+  while (numCharacters < 8 || numCharacters > 128) {
+    window.alert("Number must be between ");
+    numCharacters = window.prompt(
+      "How many characters should your password include, between 8 and 128?"
+    );
   }
+
+  //Update passParameters
+  passParameters.quantity = numCharacters;
 
   ///test section
   //assign response to hasUpperCase
