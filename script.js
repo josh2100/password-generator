@@ -10,16 +10,29 @@ const passParameters = {
   uppercase: "",
 };
 
-//ask how many characters you would like
+//Ask about password requirements
 const passPrompts = function () {
   const numCharacters = window.prompt("numCharacters, between 8 and 128");
-  passParameters.quantity = numCharacters;
-  let hasUppercase = window.prompt("Includes uppercase, true or false");
-  passParameters.uppercase = hasUppercase;
-  if (hasUppercase) {
-    selectedCharacters.push(capLetters);
-    selectedCharacters.toString();
+  //Check if response is valid
+  if (numCharacters >= 8 && numCharacters <= 128) {
+    //Update passParameters
+    passParameters.quantity = numCharacters;
+  } else {
+    window.prompt("Please enter number between 8 and 128.");
+    //make them try again
   }
+
+  ///test section
+  //assign response to hasUpperCase
+  const hasUppercase = window.prompt("Includes uppercase, true or false");
+
+  // passParameters.uppercase = hasUppercase;
+  // if (hasUppercase) {
+  //   selectedCharacters.push(capLetters);
+  //   selectedCharacters.toString();
+  // }
+
+  ///test section
 };
 
 ///add parameters so it can be passed through
