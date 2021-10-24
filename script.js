@@ -3,11 +3,14 @@ const selectedCharacters = [];
 const letters = "abcdefghijklmnopqrstuvwxyz";
 const capLetters = "ABCDEFGHIJKLMOPWRSTUVWXYZ";
 
+//https://stackoverflow.com/questions/5754712/add-characters-to-a-string-in-javascript
+
 //object to store parameters
 const passParameters = {
   ///change all instances of this length!!
   quantity: "",
   uppercase: "",
+  specialCharacters: "",
 };
 
 //Ask about password requirements
@@ -17,7 +20,7 @@ const passPrompts = function () {
   );
   //Check if response is valid, add or is not number
   while (numCharacters < 8 || numCharacters > 128) {
-    window.alert("Number must be between ");
+    window.alert("Number must be between 8 and 128");
     numCharacters = window.prompt(
       "How many characters should your password include, between 8 and 128?"
     );
