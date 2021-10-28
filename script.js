@@ -1,8 +1,20 @@
-// Assignment code here
-const selectedCharacters = [];
-const letters = "abcdefghijklmnopqrstuvwxyz";
-const capLetters = "ABCDEFGHIJKLMOPWRSTUVWXYZ";
+const selectedCharacters = ["a", "b", "c", "d"];
+const letters = ["a", "b", "c"];
+const capLetters = ["A", "B", "C"];
+const symbols = ["!", "@", "#"];
+///could I append a string??
 
+const randomCharacter = function () {
+  var selectCharacter =
+    selectedCharacters[Math.floor(Math.random() * selectedCharacters.length)];
+  return selectCharacter;
+};
+
+const addEachCharacter = function (array1) {
+  for (var i = 0; i < array1.length; i++) {
+    selectedCharacters.push(array1[i]);
+  }
+};
 //https://stackoverflow.com/questions/5754712/add-characters-to-a-string-in-javascript
 
 //object to store parameters
@@ -33,11 +45,11 @@ const passPrompts = function () {
   //assign response to hasUpperCase
   const hasUppercase = window.prompt("Includes uppercase, true or false");
 
-  // passParameters.uppercase = hasUppercase;
-  // if (hasUppercase) {
-  //   selectedCharacters.push(capLetters);
-  //   selectedCharacters.toString();
-  // }
+  passParameters.uppercase = hasUppercase;
+  if (hasUppercase) {
+    selectedCharacters.push(capLetters);
+    // selectedCharacters.toString();
+  }
 
   ///test section
 };
@@ -50,16 +62,21 @@ const generatePassword = function () {
   parameterArray[0] = passParameters.quantity;
   parameterArray[1] = passParameters.uppercase;
 
-  ///magic
+  ///fix
   const keyword = [];
 
+  //works
+  // for (var i = 0; i < passParameters.quantity; i++) {
+  //   keyword.push(letters.charAt(Math.floor(Math.random() * letters.length)));
+  // }
+  //alt
   for (var i = 0; i < passParameters.quantity; i++) {
-    keyword.push(letters.charAt(Math.floor(Math.random() * letters.length)));
+    keyword.push(randomCharacter());
   }
 
-  //magic
+  //fix
 
-  //this is a test, will actuall return password based on parameters
+  //this is a test, will actually return password based on parameters
   // return parameterArray;
   // keyword = keyword.toString();
   let string = keyword.join("");
@@ -82,3 +99,7 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+// console.log(randomCharacter());
+// addEachCharacter(symbols);
+console.log(selectedCharacters);
