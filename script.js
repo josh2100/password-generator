@@ -5,6 +5,7 @@ const symbols = ["!", "@", "#"];
 ///could I append a string??
 
 const randomCharacter = function () {
+  //selects a character from selectedCharacters
   var selectCharacter =
     selectedCharacters[Math.floor(Math.random() * selectedCharacters.length)];
   return selectCharacter;
@@ -43,12 +44,13 @@ const passPrompts = function () {
 
   ///test section
   //assign response to hasUpperCase
-  const hasUppercase = window.prompt("Includes uppercase, true or false");
-
+  const hasUppercase = window.confirm("Includes uppercase?");
   passParameters.uppercase = hasUppercase;
   if (hasUppercase) {
-    selectedCharacters.push(capLetters);
-    // selectedCharacters.toString();
+    //works
+    // selectedCharacters.push(capLetters);
+    //alt
+    addEachCharacter(capLetters);
   }
 
   ///test section
