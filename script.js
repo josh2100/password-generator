@@ -1,10 +1,64 @@
-var selectedCharacters = [""];
-var lowLetters = ["a", "b", "c"];
-var capLetters = ["A", "B", "C"];
-var symbols = ["!", "@", "#"];
-const numbers = ["1", "2", "3", "4", "5"];
+let selectedCharacters = [""];
+const lowLetters = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+const capLetters = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_"];
+const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
-var passParameters = {
+const passParameters = {
   quantity: "",
   lowercase: "",
   uppercase: "",
@@ -12,21 +66,21 @@ var passParameters = {
   special: "",
 };
 
-var randomCharacter = function () {
+const randomCharacter = function () {
   //selects a character from selectedCharacters
   var selectCharacter =
     selectedCharacters[Math.floor(Math.random() * selectedCharacters.length)];
   return selectCharacter;
 };
 
-var addEachCharacter = function (array1) {
-  for (var i = 0; i < array1.length; i++) {
+const addEachCharacter = function (array1) {
+  for (let i = 0; i < array1.length; i++) {
     selectedCharacters.push(array1[i]);
   }
 };
 
 // Ask for password requirements
-var passPrompts = function () {
+const passPrompts = function () {
   // Reset selected characters for additional clicks
   selectedCharacters = [""];
 
@@ -35,7 +89,7 @@ var passPrompts = function () {
   );
   //Check if response is valid, add or is not number
   while (numCharacters < 8 || numCharacters > 128 || isNaN(numCharacters)) {
-    window.alert("Number must be between 8 and 128");
+    window.alert("Input must be a number between 8 and 128.");
     numCharacters = window.prompt(
       "How many characters should your password include, between 8 and 128?"
     );
@@ -44,7 +98,7 @@ var passPrompts = function () {
   passParameters.quantity = numCharacters;
 
   // Check if user wants lowercase numbers
-  var hasLowercase = window.confirm(
+  let hasLowercase = window.confirm(
     "Do you want lowercase characters in your password?"
   );
   passParameters.uppercase = hasLowercase;
@@ -53,7 +107,7 @@ var passPrompts = function () {
   }
 
   // Check if user wants uppercase characters
-  var hasUppercase = window.confirm(
+  let hasUppercase = window.confirm(
     "Do you want uppercase characters in your password?"
   );
   passParameters.uppercase = hasUppercase;
@@ -62,7 +116,7 @@ var passPrompts = function () {
   }
 
   // Check if user wants numeric characters
-  var hasNumeric = window.confirm(
+  let hasNumeric = window.confirm(
     "Do you want numeric characters in your password?"
   );
   passParameters.special = hasNumeric;
@@ -71,22 +125,28 @@ var passPrompts = function () {
   }
 
   // Check if user wants special characters
-  var hasSpecial = window.confirm(
+  let hasSpecial = window.confirm(
     "Do you want special characters in your password?"
   );
   passParameters.special = hasSpecial;
   if (hasSpecial) {
     addEachCharacter(symbols);
   }
+
+  // If no type of character is selected...
+  if (!hasLowercase && !hasUppercase && !hasNumeric && !hasSpecial) {
+    window.alert("Try again! Please select at least one character type.");
+    passPrompts();
+  }
 };
 
-var generatePassword = function () {
+const generatePassword = function () {
   passPrompts();
 
   // Builds keyword based on passParameters
   const keyword = [];
 
-  for (var i = 0; i < passParameters.quantity; i++) {
+  for (let i = 0; i < passParameters.quantity; i++) {
     keyword.push(randomCharacter());
   }
 
@@ -95,14 +155,13 @@ var generatePassword = function () {
   return string;
 };
 
-// STARTER CODE BELOW
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+const generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  const password = generatePassword();
+  const passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 }
