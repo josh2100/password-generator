@@ -25,7 +25,7 @@ var addEachCharacter = function (array1) {
   }
 };
 
-//Ask about password requirements
+// Ask for password requirements
 var passPrompts = function () {
   // Reset selected characters for additional clicks
   selectedCharacters = [""];
@@ -34,7 +34,7 @@ var passPrompts = function () {
     "How many characters should your password include, between 8 and 128?"
   );
   //Check if response is valid, add or is not number
-  while (numCharacters < 8 || numCharacters > 128) {
+  while (numCharacters < 8 || numCharacters > 128 || isNaN(numCharacters)) {
     window.alert("Number must be between 8 and 128");
     numCharacters = window.prompt(
       "How many characters should your password include, between 8 and 128?"
@@ -80,18 +80,17 @@ var passPrompts = function () {
   }
 };
 
-///add parameters so it can be passed through
 var generatePassword = function () {
   passPrompts();
 
-  //builds keyword based on passParameters
+  // Builds keyword based on passParameters
   const keyword = [];
 
   for (var i = 0; i < passParameters.quantity; i++) {
     keyword.push(randomCharacter());
   }
 
-  // change keyword into string and return
+  // Change keyword into string and return
   let string = keyword.join("");
   return string;
 };
@@ -110,7 +109,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// console.log(randomCharacter());
-// addEachCharacter(symbols);
-console.log(selectedCharacters);
