@@ -67,13 +67,14 @@ const passParameters = {
 };
 
 const randomCharacter = function () {
-  //selects a character from selectedCharacters
+  // Selects one character from selectedCharacters
   var selectCharacter =
     selectedCharacters[Math.floor(Math.random() * selectedCharacters.length)];
   return selectCharacter;
 };
 
 const addEachCharacter = function (array1) {
+  // Adds to selected characters with an array as an argument
   for (let i = 0; i < array1.length; i++) {
     selectedCharacters.push(array1[i]);
   }
@@ -87,14 +88,14 @@ const passPrompts = function () {
   let numCharacters = window.prompt(
     "How many characters should your password include, between 8 and 128?"
   );
-  //Check if response is valid, add or is not number
+  // Check if response is valid, add or is not number
   while (numCharacters < 8 || numCharacters > 128 || isNaN(numCharacters)) {
     window.alert("Input must be a number between 8 and 128.");
     numCharacters = window.prompt(
       "How many characters should your password include, between 8 and 128?"
     );
   }
-  //Update passParameters with provided number
+  // Update passParameters with user provided number
   passParameters.quantity = numCharacters;
 
   // Check if user wants lowercase numbers
@@ -133,7 +134,7 @@ const passPrompts = function () {
     addEachCharacter(symbols);
   }
 
-  // If no type of character is selected...
+  // If no type of character is selected, make user repeat process
   if (!hasLowercase && !hasUppercase && !hasNumeric && !hasSpecial) {
     window.alert("Try again! Please select at least one character type.");
     passPrompts();
@@ -155,7 +156,7 @@ const generatePassword = function () {
   return string;
 };
 
-// Get references to the #generate element
+// Get reference to the #generate element
 const generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
