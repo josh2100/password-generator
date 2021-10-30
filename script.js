@@ -1,33 +1,34 @@
-const selectedCharacters = ["a", "b", "c", "d"];
-const letters = ["a", "b", "c"];
-const capLetters = ["A", "B", "C"];
-const symbols = ["!", "@", "#"];
-///could I append a string??
+var selectedCharacters = ["?"];
+var letters = ["a", "b", "c"];
+var capLetters = ["A", "B", "C"];
+var symbols = ["!", "@", "#"];
 
-const randomCharacter = function () {
+var passParameters = {
+  quantity: "",
+  lowercase: "",
+  uppercase: "",
+  numeric: "",
+  special: "",
+};
+
+var randomCharacter = function () {
   //selects a character from selectedCharacters
   var selectCharacter =
     selectedCharacters[Math.floor(Math.random() * selectedCharacters.length)];
   return selectCharacter;
 };
 
-const addEachCharacter = function (array1) {
+var addEachCharacter = function (array1) {
   for (var i = 0; i < array1.length; i++) {
     selectedCharacters.push(array1[i]);
   }
 };
-//https://stackoverflow.com/questions/5754712/add-characters-to-a-string-in-javascript
-
-//object to store parameters
-const passParameters = {
-  ///change all instances of this length!!
-  quantity: "",
-  uppercase: "",
-  specialCharacters: "",
-};
 
 //Ask about password requirements
-const passPrompts = function () {
+var passPrompts = function () {
+  // Reset selected characters for additional clicks
+  selectedCharacters = ["?"];
+
   let numCharacters = window.prompt(
     "How many characters should your password include, between 8 and 128?"
   );
@@ -38,58 +39,50 @@ const passPrompts = function () {
       "How many characters should your password include, between 8 and 128?"
     );
   }
-
-  //Update passParameters
+  //Update passParameters with provided number
   passParameters.quantity = numCharacters;
 
-  ///test section
-  //assign response to hasUpperCase
-  const hasUppercase = window.confirm("Includes uppercase?");
+  // Check if user wants lowercase numbers
+
+  // Check if user wants uppercase characters
+  var hasUppercase = window.confirm(
+    "Do you want uppercase characters in your password?"
+  );
   passParameters.uppercase = hasUppercase;
   if (hasUppercase) {
-    //works
-    // selectedCharacters.push(capLetters);
-    //alt
     addEachCharacter(capLetters);
   }
 
-  ///test section
+  // Check if user wants special characters
+  var hasSpecial = window.confirm(
+    "Do you want special characters in your password?"
+  );
+  passParameters.special = hasSpecial;
+  if (hasSpecial) {
+    addEachCharacter(symbols);
+  }
 };
 
 ///add parameters so it can be passed through
-const generatePassword = function () {
+var generatePassword = function () {
+  // Reset Parameters in case they are clicking again
   passPrompts();
 
-  const parameterArray = [];
-  parameterArray[0] = passParameters.quantity;
-  parameterArray[1] = passParameters.uppercase;
-
-  ///fix
+  //builds keyword based on passParameters
   const keyword = [];
 
-  //works
-  // for (var i = 0; i < passParameters.quantity; i++) {
-  //   keyword.push(letters.charAt(Math.floor(Math.random() * letters.length)));
-  // }
-  //alt
   for (var i = 0; i < passParameters.quantity; i++) {
     keyword.push(randomCharacter());
   }
 
-  //fix
-
-  //this is a test, will actually return password based on parameters
-  // return parameterArray;
-  // keyword = keyword.toString();
+  // change keyword into string and return
   let string = keyword.join("");
   return string;
 };
 
-// no touchy
-//
-//
+// STARTER CODE BELOW
 // Get references to the #generate element
-const generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
