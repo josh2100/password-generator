@@ -1,7 +1,8 @@
-var selectedCharacters = ["?"];
-var letters = ["a", "b", "c"];
+var selectedCharacters = [""];
+var lowLetters = ["a", "b", "c"];
 var capLetters = ["A", "B", "C"];
 var symbols = ["!", "@", "#"];
+const numbers = ["1", "2", "3", "4", "5"];
 
 var passParameters = {
   quantity: "",
@@ -27,7 +28,7 @@ var addEachCharacter = function (array1) {
 //Ask about password requirements
 var passPrompts = function () {
   // Reset selected characters for additional clicks
-  selectedCharacters = ["?"];
+  selectedCharacters = [""];
 
   let numCharacters = window.prompt(
     "How many characters should your password include, between 8 and 128?"
@@ -43,6 +44,13 @@ var passPrompts = function () {
   passParameters.quantity = numCharacters;
 
   // Check if user wants lowercase numbers
+  var hasLowercase = window.confirm(
+    "Do you want lowercase characters in your password?"
+  );
+  passParameters.uppercase = hasLowercase;
+  if (hasLowercase) {
+    addEachCharacter(lowLetters);
+  }
 
   // Check if user wants uppercase characters
   var hasUppercase = window.confirm(
@@ -51,6 +59,15 @@ var passPrompts = function () {
   passParameters.uppercase = hasUppercase;
   if (hasUppercase) {
     addEachCharacter(capLetters);
+  }
+
+  // Check if user wants numeric characters
+  var hasNumeric = window.confirm(
+    "Do you want numeric characters in your password?"
+  );
+  passParameters.special = hasNumeric;
+  if (hasNumeric) {
+    addEachCharacter(numbers);
   }
 
   // Check if user wants special characters
@@ -65,7 +82,6 @@ var passPrompts = function () {
 
 ///add parameters so it can be passed through
 var generatePassword = function () {
-  // Reset Parameters in case they are clicking again
   passPrompts();
 
   //builds keyword based on passParameters
